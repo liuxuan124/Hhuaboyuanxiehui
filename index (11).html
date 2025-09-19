@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>江宁区花卉盆景协会</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // 主色调：清新自然的绿色系
+                        'primary-green': '#2E7D32',      // 主绿色
+                        'primary-green-light': '#E8F5E9', // 主绿色浅色
+                        'vitality-green': '#3A7D44',  // 生机绿 - 产业绿
+                        'vitality-green-light': '#F0F7EF', // 生机绿浅色
+                        'petal-pink': '#F08080',      // 花瓣粉
+                        'petal-pink-light': '#FFEEEE', // 花瓣粉浅色
+                        
+                        // 辅助色
+                        'trust-orange': '#FF7D00',    // 可信橙
+                        'policy-blue': '#1E5A9A',     // 政策蓝
+                        'member-purple': '#7B4288',   // 会员紫
+                        
+                        // 中性色
+                        'text-dark': '#333333',       // 正文文字
+                        'text-medium': '#666666',     // 辅助文字
+                        'bg-light': '#F5F5F5',        // 页面背景
+                        'white': '#FFFFFF'            // 内容容器
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            }
+            .card-shadow-hover {
+                transition: all 0.3s ease;
+            }
+            .card-shadow-hover:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+                transform: translateY(-2px);
+            }
+            .page-transition {
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            }
+            .page-enter {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            .page-active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .cert-badge {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background-color: #FFD700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                border: 2px solid #2E7D32;
+            }
+            .nav-active {
+                color: currentColor;
+                position: relative;
+            }
+            .nav-active::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60%;
+                height: 2px;
+                border-radius: 1px;
+            }
+            .detail-link {
+                cursor: pointer;
+                position: relative;
+                display: inline-block;
+            }
+            .detail-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 1px;
+                bottom: -1px;
+                left: 0;
+                transition: width 0.3s ease;
+            }
+            .detail-link:hover::after {
+                width: 100%;
+            }
+            .badge-decoration {
+                position: relative;
+            }
+            .badge-decoration::before {
+                content: '';
+                position: absolute;
+                width: 4px;
+                height: 20px;
+                left: -12px;
+                top: 50%;
+                transform: translateY(-50%);
+                border-radius: 2px;
+            }
+            .primary-card {
+                border-top: 3px solid #2E7D32;
+                position: relative;
+            }
+            .primary-card::after {
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%232E7D3233' d='M50,30 Q65,30 75,45 L75,45 Q85,60 70,70 L50,85 L30,70 Q15,60 25,45 L25,45 Q35,30 50,30 Z'/%3E%3Cpath fill='%232E7D3233' d='M50,40 Q55,40 60,45 L60,45 Q65,50 60,55 L50,60 L40,55 Q35,50 40,45 L40,45 Q45,40 50,40 Z'/%3E%3C/svg%3E");
+                background-size: contain;
+                background-repeat: no-repeat;
+                bottom: 10px;
+                right: 10px;
+            }
+            .flower-card {
+                border-top: 3px solid #3A7D44;
+                position: relative;
+            }
+            .flower-card::after {
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 24px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%233A7D4433' d='M50,10 Q70,10 85,25 L85,25 Q90,30 85,50 L70,70 Q60,80 50,75 L40,80 Q30,75 20,60 L10,40 Q10,25 30,10 L50,10 Z'/%3E%3C/svg%3E");
+                background-size: contain;
+                background-repeat: no-repeat;
+                bottom: 10px;
+                right: 10px;
+            }
+            .carousel-progress {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 3px;
+                background-color: #2E7D32;
+                transition: width 0.5s ease;
+            }
+            .news-ticker {
+                animation: ticker 20s linear infinite;
+            }
+            @keyframes ticker {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+            .news-ticker:hover {
+                animation-play-state: paused;
+            }
+        }
+    </style>
+</head>
+<body class="bg-bg-light font-sans text-text-dark min-h-screen flex flex-col">
+    <!-- 顶部导航栏 -->
+    <header class="bg-primary-green shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <!-- Logo融入绿叶元素 -->
+                    <div class="w-10 h-10 rounded-lg mr-3 bg-white flex items-center justify-center">
+                        <div class="w-6 h-6 relative">
+                            <!-- 绿叶元素 -->
+                            <svg viewBox="0 0 100 100" class="absolute top-0 left-0 w-6 h-6">
+                                <path fill="#2E7D32" d="M50,10 Q70,10 85,25 L85,25 L70,50 L85,75 L85,75 Q70,90 50,90 L50,90 Q30,90 15,75 L15,75 L30,50 L15,25 L15,25 Q30,10 50,10 Z" />
+                                <path fill="white" d="M50,30 L50,70 M30,50 L70,50" />
+                            </svg>
+                            <!-- 装饰叶片 -->
+                            <svg viewBox="0 0 100 100" class="absolute bottom-0 right-0 w-4 h-4 text-3A7D44">
+                                <path fill="#3A7D44" d="M30,10 Q50,10 60,30 L80,30 Q90,40 80,60 L60,70 Q50,90 30,80 L10,60 Q0,40 10,30 L30,30 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-xl font-bold text-white">江宁区花卉盆景协会</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-white/20 transition-colors" data-page="search-page">
+                        <i class="fa fa-search text-white"></i>
+                    </button>
+                    <button class="p-2 rounded-full hover:bg-white/20 transition-colors" data-page="notifications-page">
+                        <i class="fa fa-bell text-white"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 新闻滚动条 -->
+    <div class="bg-primary-green-light py-2 overflow-hidden relative">
+        <div class="news-ticker whitespace-nowrap">
+            <span class="inline-block mx-6 text-primary-green"><i class="fa fa-bullhorn mr-2"></i>11月15日-20日将举办年度花卉展销会，敬请期待</span>
+            <span class="inline-block mx-6 text-primary-green"><i class="fa fa-bullhorn mr-2"></i>协会新增5家会员单位，产业规模进一步扩大</span>
+            <span class="inline-block mx-6 text-primary-green"><i class="fa fa-bullhorn mr-2"></i>《江宁区花卉产业发展规划(2023-2025)》正式发布</span>
+            <span class="inline-block mx-6 text-primary-green"><i class="fa fa-bullhorn mr-2"></i>协会将组织会员参加全国花卉博览会</span>
+        </div>
+    </div>
+
+    <!-- 主内容区 - 包含所有页面 -->
+    <main class="flex-grow overflow-y-auto pb-20">
+        <!-- 首页 -->
+        <div id="home-page" class="page-content page-active">
+            <!-- 轮播图 - 首图为花卉场景 -->
+            <div class="relative h-48 md:h-64 overflow-hidden">
+                <div class="carousel relative h-full">
+                    <!-- 花卉主题首图 -->
+                    <div class="carousel-item absolute inset-0 opacity-100 transition-opacity duration-500">
+                        <img src="https://picsum.photos/id/152/800/400" alt="花卉产业发展" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-green/60 to-black/30 flex items-center">
+                            <div class="container mx-auto px-6">
+                                <h2 class="text-white text-2xl md:text-3xl font-bold">绿色产业 生态发展</h2>
+                                <p class="text-white mt-2 max-w-md">协会推动花卉产业绿色可持续发展，助力乡村振兴</p>
+                            </div>
+                        </div>
+                        <div class="carousel-progress" style="width: 100%;"></div>
+                    </div>
+                    <div class="carousel-item absolute inset-0 opacity-0 transition-opacity duration-500">
+                        <img src="https://picsum.photos/id/145/800/400" alt="政企合作会议" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-policy-blue/60 to-black/30 flex items-center">
+                            <div class="container mx-auto px-6">
+                                <h2 class="text-white text-2xl md:text-3xl font-bold">政企协同发展论坛</h2>
+                                <p class="text-white mt-2 max-w-md">探讨花卉盆景产业高质量发展新路径</p>
+                            </div>
+                        </div>
+                        <div class="carousel-progress" style="width: 0%;"></div>
+                    </div>
+                    <div class="carousel-item absolute inset-0 opacity-0 transition-opacity duration-500">
+                        <img src="https://picsum.photos/id/106/800/400" alt="产业政策宣讲" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-vitality-green/60 to-black/30 flex items-center">
+                            <div class="container mx-auto px-6">
+                                <h2 class="text-white text-2xl md:text-3xl font-bold">最新产业扶持政策发布</h2>
+                                <p class="text-white mt-2 max-w-md">2023年江宁区花卉产业发展补贴政策详解</p>
+                            </div>
+                        </div>
+                        <div class="carousel-progress" style="width: 0%;"></div>
+                    </div>
+                    <div class="carousel-item absolute inset-0 opacity-0 transition-opacity duration-500">
+                        <img src="https://picsum.photos/id/118/800/400" alt="花卉展销活动" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-petal-pink/60 to-black/30 flex items-center">
+                            <div class="container mx-auto px-6">
+                                <h2 class="text-white text-2xl md:text-3xl font-bold">年度花卉展销会</h2>
+                                <p class="text-white mt-2 max-w-md">11月15日-20日 江宁区文化中心广场举办</p>
+                            </div>
+                        </div>
+                        <div class="carousel-progress" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <!-- 轮播指示器 -->
+                <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                    <button class="w-2.5 h-2.5 rounded-full bg-white opacity-100 carousel-indicator active" data-index="0"></button>
+                    <button class="w-2.5 h-2.5 rounded-full bg-white opacity-50 carousel-indicator" data-index="1"></button>
+                    <button class="w-2.5 h-2.5 rounded-full bg-white opacity-50 carousel-indicator" data-index="2"></button>
+                    <button class="w-2.5 h-2.5 rounded-full bg-white opacity-50 carousel-indicator" data-index="3"></button>
+                </div>
+            </div>
+
+            <!-- 功能导航区 - 色彩区分模块 -->
+            <div class="bg-white py-6 border-t border-gray-100">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold mb-6 text-center">服务中心</h2>
+                    <div class="grid grid-cols-4 gap-4">
+                        <!-- 协会动态 - 主绿色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="party-page">
+                            <div class="w-14 h-14 rounded-full bg-primary-green-light flex items-center justify-center mb-2 group-hover:bg-primary-green/20 transition-colors">
+                                <i class="fa fa-newspaper-o text-primary-green text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">协会动态</span>
+                        </a>
+                        <!-- 政企协同 - 政策蓝色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="government-page">
+                            <div class="w-14 h-14 rounded-full bg-policy-blue/10 flex items-center justify-center mb-2 group-hover:bg-policy-blue/20 transition-colors">
+                                <i class="fa fa-handshake-o text-policy-blue text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">政企协同</span>
+                        </a>
+                        <!-- 产业服务 - 生机绿色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="industry-page">
+                            <div class="w-14 h-14 rounded-full bg-vitality-green-light flex items-center justify-center mb-2 group-hover:bg-vitality-green/20 transition-colors">
+                                <i class="fa fa-leaf text-vitality-green text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">产业服务</span>
+                        </a>
+                        <!-- 政策服务 - 政策蓝色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="policy-page">
+                            <div class="w-14 h-14 rounded-full bg-policy-blue/10 flex items-center justify-center mb-2 group-hover:bg-policy-blue/20 transition-colors">
+                                <i class="fa fa-file-text-o text-policy-blue text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">政策服务</span>
+                        </a>
+                        <!-- 会员中心 - 会员紫色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="member-page">
+                            <div class="w-14 h-14 rounded-full bg-member-purple/10 flex items-center justify-center mb-2 group-hover:bg-member-purple/20 transition-colors">
+                                <i class="fa fa-user-o text-member-purple text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">会员中心</span>
+                        </a>
+                        <!-- 协会活动 - 花瓣粉色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="activity-page">
+                            <div class="w-14 h-14 rounded-full bg-petal-pink-light flex items-center justify-center mb-2 group-hover:bg-petal-pink/20 transition-colors">
+                                <i class="fa fa-calendar text-petal-pink text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">协会活动</span>
+                        </a>
+                        <!-- 可信生态 - 可信橙色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="trust-ecology-page">
+                            <div class="w-14 h-14 rounded-full bg-trust-orange/10 flex items-center justify-center mb-2 group-hover:bg-trust-orange/20 transition-colors">
+                                <i class="fa fa-shield text-trust-orange text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">可信生态</span>
+                        </a>
+                        <!-- 特色花卉 - 生机绿色系 -->
+                        <a href="#" class="flex flex-col items-center group" data-page="flowers-page">
+                            <div class="w-14 h-14 rounded-full bg-vitality-green-light flex items-center justify-center mb-2 group-hover:bg-vitality-green/20 transition-colors">
+                                <i class="fa fa-pagelines text-vitality-green text-xl"></i>
+                            </div>
+                            <span class="text-sm font-medium">特色花卉</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最新动态 -->
+            <section class="py-8 bg-bg-light">
+                <div class="container mx-auto px-4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-primary-green flex items-center badge-decoration" style="--tw-text-opacity: 1;">
+                            <i class="fa fa-newspaper-o mr-2"></i>最新动态
+                            <style>
+                                .badge-decoration::before { background-color: #2E7D32; }
+                            </style>
+                        </h2>
+                        <a href="#" class="text-primary-green text-sm flex items-center detail-link" style="--tw-text-opacity: 1;" data-page="party-page">
+                            查看全部 <i class="fa fa-angle-right ml-1"></i>
+                            <style>
+                                .detail-link::after { background-color: #2E7D32; }
+                            </style>
+                        </a>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- 协会动态卡片 -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover primary-card">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://picsum.photos/id/116/400/300" alt="协会工作会议" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-5">
+                                <span class="inline-block px-3 py-1 bg-primary-green-light text-primary-green text-xs rounded-full mb-3">协会动态</span>
+                                <h3 class="font-bold text-lg mb-2">年度工作会议顺利召开</h3>
+                                <p class="text-text-medium text-sm mb-4 line-clamp-2">协会召开年度工作会议，总结上一年度工作成果，部署新一年度工作计划，推动花卉产业创新发展。</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-10-15</span>
+                                    <a href="#" class="text-primary-green text-sm detail-link" data-page="party-page" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #2E7D32; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 产业服务卡片 -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover flower-card">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://picsum.photos/id/133/400/300" alt="产业链资源地图" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-5">
+                                <span class="inline-block px-3 py-1 bg-vitality-green-light text-vitality-green text-xs rounded-full mb-3">产业服务</span>
+                                <h3 class="font-bold text-lg mb-2">产业链资源地图正式发布</h3>
+                                <p class="text-text-medium text-sm mb-4 line-clamp-2">整合全区花卉盆景产业资源，包含种植基地、销售渠道和科研机构等信息的资源地图正式上线。</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-10-10</span>
+                                    <a href="#" class="text-vitality-green text-sm detail-link" data-page="industry-page" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 协会活动卡片 -->
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://picsum.photos/id/118/400/300" alt="花卉展销会" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-5">
+                                <span class="inline-block px-3 py-1 bg-petal-pink-light text-petal-pink text-xs rounded-full mb-3">协会活动</span>
+                                <h3 class="font-bold text-lg mb-2">2023年度花卉展销会即将举办</h3>
+                                <p class="text-text-medium text-sm mb-4 line-clamp-2">为期5天的年度花卉展销会将于11月15日在江宁区文化中心广场举办，汇集全区优质花卉产品。</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-10-08</span>
+                                    <a href="#" class="text-petal-pink text-sm detail-link" data-page="activity-page" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #F08080; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 特色花卉展示区 -->
+            <section class="py-8 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-vitality-green flex items-center badge-decoration" style="--tw-text-opacity: 1;">
+                            <i class="fa fa-pagelines mr-2"></i>特色花卉推荐
+                            <style>
+                                .badge-decoration::before { background-color: #3A7D44; }
+                            </style>
+                        </h2>
+                        <a href="#" class="text-vitality-green text-sm flex items-center detail-link" data-page="flowers-page" style="--tw-text-opacity: 1;">
+                            更多花卉 <i class="fa fa-angle-right ml-1"></i>
+                            <style>
+                                .detail-link::after { background-color: #3A7D44; }
+                            </style>
+                        </a>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/152/300/300" alt="金边墨兰" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                <div class="absolute top-2 left-2 bg-vitality-green text-white text-xs px-2 py-1 rounded">新品</div>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">金边墨兰</h3>
+                                <p class="text-text-medium text-xs mt-1">江宁区特产</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥128</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="金边墨兰" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/146/300/300" alt="四季海棠" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">四季海棠</h3>
+                                <p class="text-text-medium text-xs mt-1">适应性强</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥38</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="四季海棠" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/106/300/300" alt="精品月季" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                <div class="absolute top-2 left-2 bg-petal-pink text-white text-xs px-2 py-1 rounded">热销</div>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">精品月季</h3>
+                                <p class="text-text-medium text-xs mt-1">多色可选</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥58</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="精品月季" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/118/300/300" alt="造型盆景" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">造型盆景</h3>
+                                <p class="text-text-medium text-xs mt-1">大师作品</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥268</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="造型盆景" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 产业数据统计 -->
+            <section class="py-8 bg-primary-green-light">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-center mb-8">江宁区花卉产业发展概况</h2>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="bg-white rounded-xl p-5 text-center card-shadow">
+                            <div class="w-16 h-16 rounded-full bg-primary-green-light flex items-center justify-center mx-auto mb-3">
+                                <i class="fa fa-building text-primary-green text-2xl"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-primary-green mb-1">128+</h3>
+                            <p class="text-text-medium text-sm">会员企业</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-5 text-center card-shadow">
+                            <div class="w-16 h-16 rounded-full bg-primary-green-light flex items-center justify-center mx-auto mb-3">
+                                <i class="fa fa-map-marker text-primary-green text-2xl"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-primary-green mb-1">3500+</h3>
+                            <p class="text-text-medium text-sm">种植面积(亩)</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-5 text-center card-shadow">
+                            <div class="w-16 h-16 rounded-full bg-primary-green-light flex items-center justify-center mx-auto mb-3">
+                                <i class="fa fa-line-chart text-primary-green text-2xl"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-primary-green mb-1">2.8亿</h3>
+                            <p class="text-text-medium text-sm">年产值(元)</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-5 text-center card-shadow">
+                            <div class="w-16 h-16 rounded-full bg-primary-green-light flex items-center justify-center mx-auto mb-3">
+                                <i class="fa fa-users text-primary-green text-2xl"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-primary-green mb-1">5000+</h3>
+                            <p class="text-text-medium text-sm">从业人员</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 协会简介 -->
+            <section class="py-8 bg-white border-t border-gray-100">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-center mb-6">协会简介</h2>
+                    <div class="max-w-3xl mx-auto text-center">
+                        <p class="text-text-medium mb-4">江宁区花卉盆景协会成立于2005年，是由区内花卉盆景生产经营企业、科研单位、专业技术人员和爱好者自愿组成的非营利性社会组织。</p>
+                        <p class="text-text-medium mb-6">协会旨在促进花卉盆景产业发展，加强行业自律，搭建政企沟通桥梁，为会员提供技术指导、市场信息、政策咨询等服务，推动江宁区花卉盆景产业高质量发展。</p>
+                        
+                        <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-text-medium">
+                            <a href="#" class="flex items-center hover:text-primary-green transition-colors" style="--tw-text-opacity: 1;" data-page="contact-page">
+                                <i class="fa fa-phone mr-2"></i>
+                                <span>联系我们</span>
+                            </a>
+                            <a href="#" class="flex items-center hover:text-primary-green transition-colors" style="--tw-text-opacity: 1;" data-page="location-page">
+                                <i class="fa fa-map-marker mr-2"></i>
+                                <span>协会地址</span>
+                            </a>
+                            <a href="#" class="flex items-center hover:text-primary-green transition-colors" style="--tw-text-opacity: 1;" data-page="contact-page">
+                                <i class="fa fa-envelope-o mr-2"></i>
+                                <span>电子邮箱</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 协会动态页面 -->
+        <div id="party-page" class="page-content hidden page-enter">
+            <div class="bg-primary-green bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-primary-green flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-newspaper-o mr-2"></i>协会动态
+                    </h2>
+                </div>
+            </div>
+            
+            <!-- 协会动态内容 -->
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <!-- 协会公告 -->
+                    <div class="bg-primary-green-light rounded-xl p-5 mb-8">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary-green flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-bullhorn text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="font-bold text-lg text-primary-green">协会公告</h3>
+                                <p class="text-text-medium mt-2">关于举办2023年度会员代表大会的通知：兹定于2023年12月10日上午9:00在江宁区会议中心召开年度会员代表大会，请各会员单位派代表准时参会。</p>
+                                <p class="text-text-medium text-sm mt-3">发布时间：2023-11-01</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 最新动态列表 -->
+                    <h3 class="text-lg font-bold mb-6">最新动态</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                                    <img src="https://picsum.photos/id/116/600/400" alt="年度工作会议" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div class="md:w-2/3 p-5">
+                                    <span class="inline-block px-3 py-1 bg-primary-green-light text-primary-green text-xs rounded-full mb-3">协会会议</span>
+                                    <h4 class="font-bold text-lg">年度工作会议顺利召开</h4>
+                                    <p class="text-text-medium text-sm mt-2 mb-4">10月15日，江宁区花卉盆景协会年度工作会议在区会议中心顺利召开。会议总结了上一年度协会工作成果，部署了新一年度工作计划，并就如何推动花卉产业创新发展进行了深入讨论。</p>
+                                    <p class="text-text-medium text-sm mb-4">会上，协会会长就产业发展现状及未来趋势作了重要讲话，鼓励会员单位加强技术创新，提升产品品质，拓展销售渠道，共同推动江宁区花卉产业高质量发展。</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-10-15</span>
+                                        <a href="#" class="text-primary-green text-sm detail-link" style="--tw-text-opacity: 1;" data-page="news-detail-page">
+                                            阅读全文
+                                            <style>
+                                                .detail-link::after { background-color: #2E7D32; }
+                                            </style>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                                    <img src="https://picsum.photos/id/145/600/400" alt="花卉产业研讨会" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div class="md:w-2/3 p-5">
+                                    <span class="inline-block px-3 py-1 bg-primary-green-light text-primary-green text-xs rounded-full mb-3">产业研讨</span>
+                                    <h4 class="font-bold text-lg">花卉产业创新发展研讨会成功举办</h4>
+                                    <p class="text-text-medium text-sm mt-2 mb-4">10月5日，由江宁区花卉盆景协会主办的花卉产业创新发展研讨会在我区成功举办。本次研讨会邀请了业内专家、学者和企业家代表共计100余人参加。</p>
+                                    <p class="text-text-medium text-sm mb-4">与会嘉宾围绕花卉产业数字化转型、绿色种植技术创新、品牌建设等议题展开深入讨论，为我区花卉产业发展提供了新思路、新方向。</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-10-05</span>
+                                        <a href="#" class="text-primary-green text-sm detail-link" style="--tw-text-opacity: 1;" data-page="news-detail-page">
+                                            阅读全文
+                                            <style>
+                                                .detail-link::after { background-color: #2E7D32; }
+                                            </style>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                                    <img src="https://picsum.photos/id/164/600/400" alt="新会员授牌仪式" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div class="md:w-2/3 p-5">
+                                    <span class="inline-block px-3 py-1 bg-primary-green-light text-primary-green text-xs rounded-full mb-3">会员动态</span>
+                                    <h4 class="font-bold text-lg">新会员单位授牌仪式举行</h4>
+                                    <p class="text-text-medium text-sm mt-2 mb-4">9月20日，江宁区花卉盆景协会为5家新加入的会员单位举行了隆重的授牌仪式。协会领导及各会员单位代表参加了此次活动。</p>
+                                    <p class="text-text-medium text-sm mb-4">新加入的会员单位涵盖了花卉种植、销售、花艺设计等多个领域，将进一步丰富协会的服务能力，促进会员间的交流合作。至此，协会会员总数已达到128家。</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-09-20</span>
+                                        <a href="#" class="text-primary-green text-sm detail-link" style="--tw-text-opacity: 1;" data-page="news-detail-page">
+                                            阅读全文
+                                            <style>
+                                                .detail-link::after { background-color: #2E7D32; }
+                                            </style>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 分页 -->
+                    <div class="flex justify-center mt-8">
+                        <div class="flex space-x-2">
+                            <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-text-medium hover:bg-primary-green hover:text-white hover:border-primary-green transition-colors">
+                                <i class="fa fa-angle-left"></i>
+                            </button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-green text-white">1</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-text-medium hover:bg-primary-green hover:text-white hover:border-primary-green transition-colors">2</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-text-medium hover:bg-primary-green hover:text-white hover:border-primary-green transition-colors">3</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-text-medium hover:bg-primary-green hover:text-white hover:border-primary-green transition-colors">
+                                <i class="fa fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 可信生态页面 -->
+        <div id="trust-ecology-page" class="page-content hidden page-enter">
+            <div class="bg-trust-orange bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-trust-orange flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-shield mr-2"></i>可信生态体系
+                    </h2>
+                </div>
+            </div>
+            
+            <!-- 可信生态介绍 -->
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="bg-gradient-to-r from-trust-orange/5 to-white rounded-2xl p-6 mb-8">
+                        <h3 class="text-xl font-bold text-trust-orange mb-4" style="--tw-text-opacity: 1;">关于可信生态体系</h3>
+                        <p class="text-text-medium mb-4">江宁区花卉盆景协会可信生态体系是为规范花卉市场秩序、保障消费者权益而建立的综合性服务体系。该体系通过商家认证、品质溯源、纠纷调解等多重机制，打造公平、透明、可信的花卉交易环境。</p>
+                        <p class="text-text-medium">我们致力于推动花卉产业的健康发展，提升行业整体信誉，让消费者买得放心、用得安心，同时为诚信经营的商家提供更多发展机会。</p>
+                    </div>
+                    
+                    <!-- 可信生态三大支柱 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-xl p-6 card-shadow card-shadow-hover border-t-4 border-trust-orange">
+                            <div class="w-14 h-14 rounded-full bg-trust-orange/10 flex items-center justify-center mb-4">
+                                <i class="fa fa-certificate text-trust-orange text-2xl" style="--tw-text-opacity: 1;"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">商家可信认证</h4>
+                            <p class="text-text-medium text-sm">制定严格的商家准入标准，对申请加入的花卉企业和商户进行全面评估，包括资质审核、经营状况考察、消费者评价分析等，确保认证商家的可靠性。</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 card-shadow card-shadow-hover border-t-4 border-trust-orange">
+                            <div class="w-14 h-14 rounded-full bg-trust-orange/10 flex items-center justify-center mb-4">
+                                <i class="fa fa-barcode text-trust-orange text-2xl" style="--tw-text-opacity: 1;"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">全程品质溯源</h4>
+                            <p class="text-text-medium text-sm">建立从种植、加工、运输到销售的全程溯源系统，消费者可通过扫描二维码查询花卉的生长过程、施肥情况、检测报告等信息，确保产品品质可追溯。</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 card-shadow card-shadow-hover border-t-4 border-trust-orange">
+                            <div class="w-14 h-14 rounded-full bg-trust-orange/10 flex items-center justify-center mb-4">
+                                <i class="fa fa-balance-scale text-trust-orange text-2xl" style="--tw-text-opacity: 1;"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">公正纠纷调解</h4>
+                            <p class="text-text-medium text-sm">设立专门的纠纷调解委员会，由行业专家、法律工作者等组成，为消费者和商家提供公正、高效的纠纷解决服务，维护双方合法权益。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 可信认证商家列表 -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-bold mb-4">可信认证商家</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                                <div class="md:flex">
+                                    <div class="md:w-1/3 h-48 md:h-auto overflow-hidden relative">
+                                        <img src="https://picsum.photos/id/24/600/400" alt="绿园花店" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                        <div class="cert-badge">
+                                            <i class="fa fa-shield text-yellow-800"></i>
+                                        </div>
+                                    </div>
+                                    <div class="md:w-2/3 p-5">
+                                        <h4 class="font-bold text-lg">绿园花店</h4>
+                                        <div class="flex items-center mb-3">
+                                            <div class="flex text-yellow-400 text-xs">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="text-text-medium text-xs ml-2">5.0 (128条评价)</span>
+                                            <span class="ml-3 text-xs bg-trust-orange bg-opacity-10 text-trust-orange px-2 py-0.5 rounded" style="--tw-text-opacity: 1;">AAA级认证</span>
+                                        </div>
+                                        <p class="text-text-medium text-sm mb-4">经营各类鲜花、盆景，提供花艺设计和配送服务，连续5年获得协会诚信经营奖。店内环境优雅，品种丰富，价格公道，是江宁区花卉行业的标杆企业。</p>
+                                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                                            <div class="flex items-center">
+                                                <i class="fa fa-map-marker text-trust-orange mr-2" style="--tw-text-opacity: 1;"></i>
+                                                <span class="text-sm">江宁区东山街道</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa fa-phone text-trust-orange mr-2" style="--tw-text-opacity: 1;"></i>
+                                                <span class="text-sm">025-86123456</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fa fa-clock-o text-trust-orange mr-2" style="--tw-text-opacity: 1;"></i>
+                                                <span class="text-sm">8:00-21:00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-8">
+                            <button class="px-6 py-2 border border-trust-orange text-trust-orange rounded-lg hover:bg-trust-orange hover:text-white transition-colors" data-page="trusted-merchants-page">
+                                查看更多认证商家
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 产业服务页面 -->
+        <div id="industry-page" class="page-content hidden page-enter">
+            <div class="bg-vitality-green bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-vitality-green flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-leaf mr-2"></i>产业服务
+                    </h2>
+                </div>
+            </div>
+            
+            <!-- 产业服务内容 -->
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <!-- 产业服务导航 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <a href="#resources" class="bg-vitality-green-light rounded-xl p-4 text-center card-shadow hover:bg-vitality-green hover:text-white transition-colors">
+                            <i class="fa fa-map-o text-xl mb-2"></i>
+                            <p class="text-sm font-medium">资源地图</p>
+                        </a>
+                        <a href="#technology" class="bg-vitality-green-light rounded-xl p-4 text-center card-shadow hover:bg-vitality-green hover:text-white transition-colors">
+                            <i class="fa fa-lightbulb-o text-xl mb-2"></i>
+                            <p class="text-sm font-medium">技术支持</p>
+                        </a>
+                        <a href="#market" class="bg-vitality-green-light rounded-xl p-4 text-center card-shadow hover:bg-vitality-green hover:text-white transition-colors">
+                            <i class="fa fa-line-chart text-xl mb-2"></i>
+                            <p class="text-sm font-medium">市场分析</p>
+                        </a>
+                        <a href="#training" class="bg-vitality-green-light rounded-xl p-4 text-center card-shadow hover:bg-vitality-green hover:text-white transition-colors">
+                            <i class="fa fa-graduation-cap text-xl mb-2"></i>
+                            <p class="text-sm font-medium">技能培训</p>
+                        </a>
+                    </div>
+                    
+                    <!-- 产业链资源地图 -->
+                    <div id="resources" class="mb-12">
+                        <h3 class="text-lg font-bold mb-4 flex items-center">
+                            <i class="fa fa-map-o text-vitality-green mr-2"></i>
+                            产业链资源地图
+                        </h3>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow mb-6">
+                            <div class="h-64 bg-gray-100 flex items-center justify-center">
+                                <img src="https://picsum.photos/id/133/800/400" alt="江宁区花卉产业资源地图" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-5">
+                                <p class="text-text-medium text-sm mb-4">江宁区花卉产业资源地图整合了全区花卉种植基地、销售市场、物流配送中心、科研机构等产业链关键节点信息，为企业提供全方位的资源对接服务。</p>
+                                <a href="#" class="text-vitality-green text-sm flex items-center detail-link" style="--tw-text-opacity: 1;" data-page="resource-map-page">
+                                    查看完整资源地图 <i class="fa fa-angle-right ml-1"></i>
+                                    <style>
+                                        .detail-link::after { background-color: #3A7D44; }
+                                    </style>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 重点资源推荐 -->
+                        <h4 class="font-medium mb-3">重点资源推荐</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white rounded-xl p-4 card-shadow hover:shadow-lg transition-shadow">
+                                <h5 class="font-medium mb-2">江宁区花卉种植示范基地</h5>
+                                <p class="text-text-medium text-sm mb-2">占地面积500亩，集种植、科研、观光于一体的综合性示范基地</p>
+                                <div class="flex items-center text-xs text-text-medium">
+                                    <i class="fa fa-map-marker mr-1"></i>
+                                    <span>江宁区谷里街道</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-4 card-shadow hover:shadow-lg transition-shadow">
+                                <h5 class="font-medium mb-2">华东花卉交易中心</h5>
+                                <p class="text-text-medium text-sm mb-2">区域内最大的花卉批发市场，日均交易量超过20万盆</p>
+                                <div class="flex items-center text-xs text-text-medium">
+                                    <i class="fa fa-map-marker mr-1"></i>
+                                    <span>江宁区东山街道</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-4 card-shadow hover:shadow-lg transition-shadow">
+                                <h5 class="font-medium mb-2">江苏省花卉研究所</h5>
+                                <p class="text-text-medium text-sm mb-2">专注于花卉新品种培育、病虫害防治等技术研究</p>
+                                <div class="flex items-center text-xs text-text-medium">
+                                    <i class="fa fa-map-marker mr-1"></i>
+                                    <span>江宁区科学园</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 技术支持 -->
+                    <div id="technology" class="mb-12">
+                        <h3 class="text-lg font-bold mb-4 flex items-center">
+                            <i class="fa fa-lightbulb-o text-vitality-green mr-2"></i>
+                            技术支持服务
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-xl p-5 card-shadow card-shadow-hover">
+                                <h4 class="font-medium mb-3">专家技术咨询</h4>
+                                <p class="text-text-medium text-sm mb-4">协会组建了由农业院校教授、研究员、高级技师组成的专家团队，为会员单位提供种植技术、病虫害防治、花期调控等专业咨询服务。</p>
+                                <a href="#" class="text-vitality-green text-sm detail-link" style="--tw-text-opacity: 1;" data-page="expert-consultation-page">
+                                    预约专家咨询
+                                    <style>
+                                        .detail-link::after { background-color: #3A7D44; }
+                                    </style>
+                                </a>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-5 card-shadow card-shadow-hover">
+                                <h4 class="font-medium mb-3">新技术推广</h4>
+                                <p class="text-text-medium text-sm mb-4">及时引进和推广国内外先进的花卉种植技术、设备和管理经验，组织技术交流会、现场观摩会等活动，提升行业整体技术水平。</p>
+                                <a href="#" class="text-vitality-green text-sm detail-link" style="--tw-text-opacity: 1;" data-page="new-technologies-page">
+                                    查看最新技术
+                                    <style>
+                                        .detail-link::after { background-color: #3A7D44; }
+                                    </style>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 个人中心页面 -->
+        <div id="my-page" class="page-content hidden page-enter">
+            <div class="bg-bg-light py-8">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center">
+                        <div class="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-md">
+                            <img src="https://picsum.photos/id/64/100/100" alt="用户头像" class="w-full h-full object-cover">
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">游客用户</h3>
+                            <p class="text-text-medium text-sm">登录后可使用更多功能</p>
+                            <button class="mt-2 px-4 py-1 bg-primary-green text-white rounded-lg text-sm hover:bg-primary-green/90 transition-colors" style="--tw-bg-opacity: 1;" data-page="login-page">
+                                登录/注册
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <h3 class="text-lg font-bold mb-4">我的服务</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-4 hover:shadow-lg transition-shadow" data-page="favorites-page">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-bg-light flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-heart-o text-text-medium"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">我的收藏</h4>
+                                    <p class="text-text-medium text-sm mt-1">查看收藏的花卉和资讯</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-4 hover:shadow-lg transition-shadow" data-page="my-activities-page">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-bg-light flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-calendar-check-o text-text-medium"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">我的活动</h4>
+                                    <p class="text-text-medium text-sm mt-1">已报名和参与的活动</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-4 hover:shadow-lg transition-shadow" data-page="my-orders-page">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-bg-light flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-shopping-cart text-text-medium"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">我的订单</h4>
+                                    <p class="text-text-medium text-sm mt-1">查看我的购买记录</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow p-4 hover:shadow-lg transition-shadow" data-page="browsing-history-page">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-bg-light flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-history text-text-medium"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-medium">浏览历史</h4>
+                                    <p class="text-text-medium text-sm mt-1">查看浏览过的内容</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 其他必要页面 -->
+        <div id="government-page" class="page-content hidden page-enter">
+            <div class="bg-policy-blue bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-policy-blue flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-handshake-o mr-2"></i>政企协同
+                    </h2>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <h3 class="text-lg font-bold mb-6">政企合作项目</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                                    <img src="https://picsum.photos/id/177/600/400" alt="花卉产业园区建设" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div class="md:w-2/3 p-5">
+                                    <span class="inline-block px-3 py-1 bg-policy-blue/10 text-policy-blue text-xs rounded-full mb-3">重点项目</span>
+                                    <h4 class="font-bold text-lg">江宁区现代花卉产业园区建设</h4>
+                                    <p class="text-text-medium text-sm mt-2 mb-4">由区政府与协会共同打造的现代花卉产业园区，总投资2亿元，占地面积1000亩，集种植、研发、展示、销售于一体，预计年产能可达5000万元。</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-text-medium text-xs"><i class="fa fa-calendar-o mr-1"></i> 2023-08-15</span>
+                                        <a href="#" class="text-policy-blue text-sm detail-link" style="--tw-text-opacity: 1;" data-page="project-detail-page">
+                                            查看详情
+                                            <style>
+                                                .detail-link::after { background-color: #1E5A9A; }
+                                            </style>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="policy-page" class="page-content hidden page-enter">
+            <div class="bg-policy-blue bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-policy-blue flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-file-text-o mr-2"></i>政策服务
+                    </h2>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <h3 class="text-lg font-bold mb-6">最新政策文件</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-xl p-4 card-shadow hover:shadow-lg transition-shadow">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-medium">《江宁区花卉产业发展扶持资金管理办法》</h4>
+                                    <p class="text-text-medium text-sm mt-1">发布时间：2023-09-01</p>
+                                </div>
+                                <a href="#" class="text-policy-blue detail-link" style="--tw-text-opacity: 1;" data-page="policy-detail-page">
+                                    查看
+                                    <style>
+                                        .detail-link::after { background-color: #1E5A9A; }
+                                    </style>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-4 card-shadow hover:shadow-lg transition-shadow">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-medium">《江宁区花卉产业高质量发展规划(2023-2025)》</h4>
+                                    <p class="text-text-medium text-sm mt-1">发布时间：2023-08-15</p>
+                                </div>
+                                <a href="#" class="text-policy-blue detail-link" style="--tw-text-opacity: 1;" data-page="policy-detail-page">
+                                    查看
+                                    <style>
+                                        .detail-link::after { background-color: #1E5A9A; }
+                                    </style>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="member-page" class="page-content hidden page-enter">
+            <div class="bg-member-purple bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-member-purple flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-user-o mr-2"></i>会员中心
+                    </h2>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="bg-member-purple/5 rounded-xl p-6 mb-8">
+                        <h3 class="text-lg font-bold text-member-purple mb-4" style="--tw-text-opacity: 1;">会员服务</h3>
+                        <p class="text-text-medium mb-4">协会为会员单位提供全方位的服务支持，包括技术指导、市场推广、政策咨询、人才培训等，助力会员单位发展壮大。</p>
+                        <button class="px-6 py-2 bg-member-purple text-white rounded-lg hover:bg-member-purple/90 transition-colors" data-page="join-member-page">
+                            申请加入会员
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="activity-page" class="page-content hidden page-enter">
+            <div class="bg-petal-pink bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-petal-pink flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-calendar mr-2"></i>协会活动
+                    </h2>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <h3 class="text-lg font-bold mb-6">近期活动</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="md:flex">
+                                <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                                    <img src="https://picsum.photos/id/118/600/400" alt="花卉展销会" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <div class="md:w-2/3 p-5">
+                                    <span class="inline-block px-3 py-1 bg-petal-pink-light text-petal-pink text-xs rounded-full mb-3">展销活动</span>
+                                    <h4 class="font-bold text-lg">2023年度花卉展销会</h4>
+                                    <p class="text-text-medium text-sm mt-2 mb-4">为期5天的年度花卉展销会将于11月15日在江宁区文化中心广场举办，汇集全区优质花卉产品，现场将有花艺表演、专家讲座等活动。</p>
+                                    <div class="flex flex-wrap gap-4 mb-4">
+                                        <div class="flex items-center text-sm">
+                                            <i class="fa fa-calendar text-petal-pink mr-2" style="--tw-text-opacity: 1;"></i>
+                                            <span>2023-11-15 至 2023-11-20</span>
+                                        </div>
+                                        <div class="flex items-center text-sm">
+                                            <i class="fa fa-map-marker text-petal-pink mr-2" style="--tw-text-opacity: 1;"></i>
+                                            <span>江宁区文化中心广场</span>
+                                        </div>
+                                    </div>
+                                    <button class="px-4 py-1 bg-petal-pink text-white rounded-lg text-sm hover:bg-petal-pink/90 transition-colors" data-page="activity-signup-page">
+                                        我要报名
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="flowers-page" class="page-content hidden page-enter">
+            <div class="bg-vitality-green bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-vitality-green flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-pagelines mr-2"></i>特色花卉
+                    </h2>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/152/300/300" alt="金边墨兰" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                <div class="absolute top-2 left-2 bg-vitality-green text-white text-xs px-2 py-1 rounded">新品</div>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">金边墨兰</h3>
+                                <p class="text-text-medium text-xs mt-1">江宁区特产</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥128</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="金边墨兰" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/146/300/300" alt="四季海棠" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">四季海棠</h3>
+                                <p class="text-text-medium text-xs mt-1">适应性强</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥38</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="四季海棠" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/106/300/300" alt="精品月季" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                                <div class="absolute top-2 left-2 bg-petal-pink text-white text-xs px-2 py-1 rounded">热销</div>
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">精品月季</h3>
+                                <p class="text-text-medium text-xs mt-1">多色可选</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥58</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="精品月季" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl overflow-hidden card-shadow card-shadow-hover">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://picsum.photos/id/118/300/300" alt="造型盆景" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm">造型盆景</h3>
+                                <p class="text-text-medium text-xs mt-1">大师作品</p>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-vitality-green text-sm font-medium" style="--tw-text-opacity: 1;">¥268</span>
+                                    <a class="text-xs text-vitality-green detail-link" data-page="flower-detail-page" data-flower="造型盆景" style="--tw-text-opacity: 1;">
+                                        查看详情
+                                        <style>
+                                            .detail-link::after { background-color: #3A7D44; }
+                                        </style>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 简单的详情页示例 -->
+        <div id="flower-detail-page" class="page-content hidden page-enter">
+            <div class="bg-vitality-green bg-opacity-10 py-4">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-xl font-bold text-vitality-green flex items-center" style="--tw-text-opacity: 1;">
+                        <i class="fa fa-pagelines mr-2"></i>花卉详情
+                    </h2>
+                </div>
+            </div>
+            
+            <section class="py-6 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="md:flex gap-6">
+                        <div class="md:w-1/2">
+                            <img src="https://picsum.photos/id/152/600/600" alt="花卉详情图" class="w-full rounded-xl">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="text-xl font-bold" id="flower-name">金边墨兰</h3>
+                            <div class="flex items-center mt-2 mb-4">
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <span class="text-text-medium text-sm ml-2">4.5 (36条评价)</span>
+                            </div>
+                            <p class="text-2xl font-bold text-vitality-green mb-4">¥128.00</p>
+                            
+                            <p class="text-text-medium mb-6">
+                                金边墨兰是江宁区特色花卉品种，叶片带有金黄色边纹，姿态优雅，花期长，香气清幽，是室内观赏和礼品赠送的佳品。
+                            </p>
+                            
+                            <div class="space-y-3 mb-6">
+                                <div class="flex">
+                                    <span class="text-text-medium w-24">产地：</span>
+                                    <span>江宁区谷里街道</span>
+                                </div>
+                                <div class="flex">
+                                    <span class="text-text-medium w-24">花期：</span>
+                                    <span>1-3个月</span>
+                                </div>
+                                <div class="flex">
+                                    <span class="text-text-medium w-24">养护难度：</span>
+                                    <span>中等</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-4">
+                                <button class="flex-1 py-2 bg-vitality-green text-white rounded-lg hover:bg-vitality-green/90 transition-colors">
+                                    立即购买
+                                </button>
+                                <button class="w-12 h-12 border border-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
+                                    <i class="fa fa-heart-o text-text-medium"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部导航栏 -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-40">
+        <div class="grid grid-cols-5">
+            <!-- 首页 -->
+            <a href="#" class="flex flex-col items-center justify-center nav-item nav-active h-16" data-page="home-page" style="color: #2E7D32;">
+                <i class="fa fa-home text-lg"></i>
+                <span class="text-xs mt-1">首页</span>
+            </a>
+            
+            <!-- 协会动态 -->
+            <a href="#" class="flex flex-col items-center justify-center nav-item h-16 text-text-medium" data-page="party-page">
+                <i class="fa fa-newspaper-o text-lg"></i>
+                <span class="text-xs mt-1">协会</span>
+            </a>
+            
+            <!-- 可信生态 -->
+            <a href="#" class="flex flex-col items-center justify-center nav-item h-16 text-text-medium" data-page="trust-ecology-page">
+                <i class="fa fa-shield text-lg"></i>
+                <span class="text-xs mt-1">可信生态</span>
+            </a>
+            
+            <!-- 产业服务 -->
+            <a href="#" class="flex flex-col items-center justify-center nav-item h-16 text-text-medium" data-page="industry-page">
+                <i class="fa fa-leaf text-lg"></i>
+                <span class="text-xs mt-1">产业</span>
+            </a>
+            
+            <!-- 我的 -->
+            <a href="#" class="flex flex-col items-center justify-center nav-item h-16 text-text-medium" data-page="my-page">
+                <i class="fa fa-user-o text-lg"></i>
+                <span class="text-xs mt-1">我的</span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // 页面切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航项点击事件
+            const navItems = document.querySelectorAll('[data-page]');
+            const pageContents = document.querySelectorAll('.page-content');
+            
+            // 为所有带有data-page属性的元素绑定点击事件
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 获取目标页面ID
+                    const targetPageId = this.getAttribute('data-page');
+                    
+                    // 特殊处理花卉详情页
+                    if (targetPageId === 'flower-detail-page') {
+                        const flowerName = this.getAttribute('data-flower');
+                        if (flowerName) {
+                            document.getElementById('flower-name').textContent = flowerName;
+                        }
+                    }
+                    
+                    // 隐藏所有页面
+                    pageContents.forEach(page => {
+                        page.classList.remove('page-active');
+                        page.classList.add('page-enter', 'hidden');
+                    });
+                    
+                    // 显示目标页面
+                    const targetPage = document.getElementById(targetPageId);
+                    if (targetPage) {
+                        targetPage.classList.remove('hidden');
+                        // 触发重排后添加active类以启用过渡动画
+                        setTimeout(() => {
+                            targetPage.classList.add('page-active');
+                            targetPage.classList.remove('page-enter');
+                        }, 10);
+                    }
+                    
+                    // 更新导航项状态
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('nav-active');
+                        nav.style.color = '';
+                    });
+                    
+                    // 设置当前导航项为激活状态
+                    const activeNav = document.querySelector(`.nav-item[data-page="${targetPageId}"]`);
+                    if (activeNav) {
+                        activeNav.classList.add('nav-active');
+                        
+                        // 根据页面设置不同的激活颜色
+                        if (targetPageId === 'home-page' || targetPageId === 'party-page') {
+                            activeNav.style.color = '#2E7D32';
+                            activeNav.style.setProperty('--nav-active-color', '#2E7D32');
+                        } else if (targetPageId === 'trust-ecology-page') {
+                            activeNav.style.color = '#FF7D00';
+                            activeNav.style.setProperty('--nav-active-color', '#FF7D00');
+                        } else if (targetPageId === 'industry-page' || targetPageId === 'flowers-page') {
+                            activeNav.style.color = '#3A7D44';
+                            activeNav.style.setProperty('--nav-active-color', '#3A7D44');
+                        } else if (targetPageId === 'my-page') {
+                            activeNav.style.color = '#666666';
+                            activeNav.style.setProperty('--nav-active-color', '#666666');
+                        }
+                        
+                        // 设置下划线颜色
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            .nav-active::after {
+                                background-color: ${activeNav.style.color};
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }
+                    
+                    // 页面滚动到顶部
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // 轮播图功能
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            function showSlide(index) {
+                // 隐藏所有幻灯片
+                carouselItems.forEach(item => {
+                    item.style.opacity = '0';
+                    item.querySelector('.carousel-progress').style.width = '0%';
+                });
+                
+                // 重置所有指示器
+                indicators.forEach(indicator => {
+                    indicator.classList.remove('active');
+                    indicator.style.opacity = '0.5';
+                });
+                
+                // 显示当前幻灯片
+                carouselItems[index].style.opacity = '1';
+                
+                // 激活当前指示器
+                indicators[index].classList.add('active');
+                indicators[index].style.opacity = '1';
+                
+                // 启动进度条动画
+                setTimeout(() => {
+                    carouselItems[index].querySelector('.carousel-progress').style.width = '100%';
+                }, 100);
+                
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                let newIndex = currentSlide + 1;
+                if (newIndex >= carouselItems.length) {
+                    newIndex = 0;
+                }
+                showSlide(newIndex);
+            }
+            
+            // 点击指示器切换幻灯片
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    showSlide(index);
+                    resetInterval();
+                });
+            });
+            
+            // 重置轮播计时器
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // 初始化轮播
+            showSlide(0);
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+    </script>
+</body>
+</html>
+    
